@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cfdna-mutect2-generator"
+version = "0.1.0"
+description = "Generate standalone cfDNA Mutect2 somatic calling shell pipelines."
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["PyYAML>=5.4"]
+
+[project.scripts]
+cfdna-mutect2-generate = "cfdna_mutect2_generator.generator:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
