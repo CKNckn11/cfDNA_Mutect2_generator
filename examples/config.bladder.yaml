@@ -1,0 +1,38 @@
+project:
+  name: bladder_cfDNA_Mutect2
+  outdir: /400T/ckn/database_code/bladder_mutect2_project
+
+input:
+  cancer_type: bladder
+  bam_dir: /400T/cfDNA_resource/BAM/bladder
+  sample_table: ""
+
+reference:
+  fasta: /400T/reference_genome/GRCh38.fa
+  interval_list: /400T/reference_genome/GRCh38.interval_list
+  common_variants: /400T/reference_genome/small_exac_common_3.hg38.vcf
+  panel_of_normals: /400T/cfDNA_resource/BAM/healthy_cfDNA/pon.vcf.gz
+  germline_resource: /400T/ckn/reference/Reference/Mutect2-exome-panel.vcf
+  af_not_in_resource: 0.00003125
+
+tools:
+  samtools: /400T/ckn/software/samtools/samtools-1.9/samtools
+  gatk_jar: /400T/software/gatk/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar
+  annovar_dir: /400T/ckn/software/annovar
+  tabix: tabix
+
+resources:
+  max_jobs: 4
+  mutect2_java_mem: 16G
+  mutect2_threads: 4
+  pileup_java_mem: 4G
+  contamination_java_mem: 4G
+  filter_java_mem: 4G
+
+annovar:
+  genome_build: hg38
+  protocols: refGene,cytoBand,exac03,dbnsfp30a
+  operations: g,r,f,f
+
+outputs:
+  aggregate_file: /400T/ckn/database_code/bladder/all_sample_mutect2_generated.txt
